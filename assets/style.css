@@ -1,0 +1,19 @@
+body {
+  background-color: #DADADA;
+}
+
+.column {
+  max-width: 600px;
+}
+
+.ui.center {
+  padding-top: 15%;
+}
+
+ul {
+  list-style: none;
+}
+
+.content span {
+  font-size: 1.5rem;
+}
