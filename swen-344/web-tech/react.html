@@ -5,11 +5,13 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Web Tech | angular</title>
+    <title>Web Tech | react</title>
     <link rel="stylesheet" type="text/css" href="../../assets/semantic.min.css">
     <link rel="stylesheet" type="text/css" href="../../assets/style.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
-    <script src="angular/app.js"></script>
+    <script src="react/react.js"></script>
+    <script src="react/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script type="text/babel" src="react/app.js"></script>
   </head>
   <body ng-controller="PhotoListCtrl">
     <style>
@@ -24,36 +26,20 @@
       <div class="column">
         <h2 class="ui blue image header">
           <div class="content">
-            Web Tech Exploration - Angular
+            Web Tech Exploration - React
           </div>
         </h2>
         <div class="ui stacked segment">
-          <ul>
-            <li ng-repeat="link in links">
-              <a href="{{link.url}}">{{link.title}}</a>
-            </li>
-          </ul>
+          <div id="list"></div>
           <div class="ui horizontal divider">
             Pictures
           </div>
-          <div class="ui centered link cards">
-            <div class="card" ng-repeat="photo in photos">
-              <div class="image">
-                <img src="{{photo.url}}">
-              </div>
-              <div class="content">
-                <div class="header">{{photo.title}}</div>
-                <div class="meta">
-                  {{photo.description}}
-                </div>
-              </div>
-            </div>
-          </div>
+          <div id="pictures"></div>
           <div class="ui horizontal divider">
             Why do you want to be in Web Engineering?
           </div>
           <p>
-            {{note}}
+            I wanted to take this course because I had already done some web work on my own and wanted to get a higher level understanding on how the web works.
           </p>
         </div>
       </div>
