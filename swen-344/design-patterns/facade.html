@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Standard Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Design Patterns | Facade</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/style.css">
+    <link rel="stylesheet" href="assets/default.css">
+    <link rel="stylesheet" href="assets/tomorrow.css">
+  </head>
+  <body>
+    <style>
+      .column {
+        max-width: 1200px;
+      }
+    </style>
+    <div class="ui center aligned grid">
+      <div class="column">
+        <h2 class="ui blue image header">
+          <div class="content">
+            Facade Pattern Example
+          </div>
+        </h2>
+        <div class="ui two column grid stacked segment">
+          <div class="center aligned column">
+<pre style="text-align:left;"><code class="js">var Mortgage = function(name) {
+    this.name = name;
+}
+
+Mortgage.prototype = {
+    applyFor: function(amount) {
+
+        // access multiple subsystems...
+
+        var result = "approved";
+        if (!new Bank().verify(this.name, amount)) {
+            result = "denied";
+        } else if (!new Credit().get(this.name)) {
+            result = "denied";
+        } else if (!new Background().check(this.name)) {
+            result = "denied";
+        }
+
+        return this.name + " has been " + result +
+               " for a " + amount + " mortgage";
+    }
+}
+
+var Bank = function() {
+    this.verify = function(name, amount) {
+        // complex logic ...
+        return true;
+    }
+}
+
+var Credit = function() {
+    this.get = function(name) {
+        // complex logic ...
+        return true;
+    }
+}
+
+var Background = function() {
+    this.check = function(name) {
+        // complex logic ...
+        return true;
+    }
+}</code></pre>
+          </div>
+          <div class="ui vertical divider"></div>
+          <div class="center aligned column">
+            <div class="ui input">
+              <input id="name" type="text" placeholder="Name">
+            </div>
+            <div class="ui input">
+              <input id="value" type="number" placeholder="Value">
+            </div>
+            <div id="submit" class="ui blue submit button">Submit</div>
+            <p id="output" style="color: red"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="js/facade.js"></script>
+    <script src="assets/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
