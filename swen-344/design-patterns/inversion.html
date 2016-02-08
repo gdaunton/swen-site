@@ -29,8 +29,51 @@
         </h2>
         <div class="ui two column grid stacked segment">
           <div class="center aligned column">
-<pre style="text-align:left;"><code class="js">
+<pre style="text-align:left;"><code class="js">$(document).ready( function(){
+  //this is my search function
+  var search = function(keyword, book) {
+      return !(book.name.toLowerCase().indexOf(keyword) == -1 && book.author.toLowerCase().indexOf(keyword) == -1);
+  }
+  var books = [new Book('Moby Dick', 'Herman Melville'),
+              new Book("Gulliver's Travels", 'Jonathan Swift'),
+              new Book('Pride and Prejudice', 'Jane Austen'),
+              new Book('To Kill a Mockingbird', 'Harper Lee')];
+  //I give it to the inversion class to use to return the books that match my search function
+  var inversion = new Inversion($('#loading'), $('#list'), books, search);
+  $('#search').click(function(){
+    inversion.search_all($('#search_input').val().toLowerCase());
+  });
+});
 
+var Inversion = function(loading, list, books, search) {
+    this.loading = loading;
+    this.list = list;
+    this.books = books;
+    this.search = search;
+    this.init()
+}
+
+  Inversion.prototype = {
+      init: function() {
+        //render list
+      },
+      search_all: function(keyword) {
+        var array = [];
+        for (x in this.books){
+          if(this.search(keyword, books[x]))
+            array.push(this.books[x]);
+        }
+        mediator.set_result(array);
+      },
+      set_result: function(array) {
+        //render list
+      }
+  }
+
+var Book = function(name, author) {
+    this.name = name;
+    this.author = author;
+}
 </code></pre>
           </div>
           <div class="ui vertical divider"></div>
