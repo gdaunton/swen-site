@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <table id="table">
+      <tr>
+        <th>ID</th>
+        <th>Location</th>
+        <th>Zip</th>
+        <th>Forcast</th>
+        <th>Image</th>
+      </tr>
+    </table>
+    <script>
+      $(document).ready( function(){
+          $.getJSON( "http://www.se.rit.edu/~swen-344/activities/rest/RESTAPI-Weather.php?action=get_weather_list", function( data ) {
+            var items = [];
+            $.each( data, function(index) {
+              var item = data[index];
+              $( "<tr><td>" + item.id + "</td><td>" + item.name + "</td><td>" + item.zip + "</td><td>" + item.forecast + "</td><td>" + item.image + "</td></tr>" ).appendTo( "#table" );
+            });
+          }).fail(function() {
+            console.log( "error" );
+          });
+      });
+    </script>
+  </body>
+</html>
