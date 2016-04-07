@@ -3,26 +3,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   </head>
   <body>
-    <table id="table">
-      <tr>
-        <th>ID</th>
-        <th>Location</th>
-        <th>Zip</th>
-        <th>Forcast</th>
-        <th>Image</th>
-      </tr>
-    </table>
+    <ul id='list'>
+    </ul>
+    <div id="content">
+    </div>
     <script>
       $(document).ready( function(){
           $.getJSON( "http://www.se.rit.edu/~swen-344/activities/rest/RESTAPI-Weather.php?action=get_weather_list", function( data ) {
             var items = [];
             $.each( data, function(index) {
               var item = data[index];
-              $( "<tr><td>" + item.id + "</td><td>" + item.name + "</td><td>" + item.zip + "</td><td>" + item.forecast + "</td><td>" + item.image + "</td></tr>" ).appendTo( "#table" );
+              var html = $('<li><a id="' + item.id + '" href="#">' + item.zip + '</a></li>');
+              $(html).click(render_data(item));
+              html.appendTo("#list");
             });
           }).fail(function() {
             console.log( "error" );
           });
+          var render_data = function(data) {
+            var data = $('<div style="display: flex;"><img src="' + data.image + '" style="width:10vw; height:10vw;"/><div><h2 style="color: #333">' + data.name + '</h2><p style="font-style: italic; font-size: 20px; color: #ccc">' + data.zip + '</p></div><p>' + data.forecast + '</p>');
+            $('#content').html(data);
+          };
       });
     </script>
   </body>
